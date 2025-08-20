@@ -1,0 +1,12 @@
+DataTpyes:
+============================
+String
+Integer
+Boolean
+Float
+
+Objects:
+=============================
+List
+Dictionary
+Set/Tuple
