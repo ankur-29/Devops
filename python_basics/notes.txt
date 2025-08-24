@@ -10,3 +10,31 @@ Objects:
 List
 Dictionary
 Set/Tuple
+
+Standard input and output
+==============================
+STDIN
+STDOUT
+
+Modules
+==============================
+os – Interacting with the operating system (files, directories, environment variables).
+sys – System-specific parameters and functions (command line arguments, interpreter info).
+math – Mathematical functions (trigonometry, logarithms, constants like π, e).
+random – Generating random numbers, shuffling, selections.
+datetime – Working with dates, times, time zones.
+time – Time-related functions (sleep, epoch time).
+json – Encode/decode JSON data.
+re – Regular expressions for pattern matching in strings.
+collections – Special container datatypes (Counter, defaultdict, deque, namedtuple).
+itertools – Efficient looping, combinatorics (permutations, combinations, infinite iterators).
+functools – Higher-order functions (reduce, lru_cache, partial).
+subprocess – Running system commands and external processes.
+logging – Logging messages for debugging and monitoring.
+argparse – Parsing command-line arguments.
+shutil – File operations (copy, move, remove).
+pathlib – Object-oriented file system paths.
+pickle – Object serialization and deserialization.
+threading / multiprocessing – Parallelism and concurrency.
+http / urllib – Handling HTTP requests (basic networking).
+statistics – Mean, median, mode, variance calculations.
