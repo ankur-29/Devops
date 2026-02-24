@@ -1,0 +1,6 @@
+what is docker
+What is container and what problem does it solve
+Container repository - where do containers live
+
+what is container technically
+port mapping in docker

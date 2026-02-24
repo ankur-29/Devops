@@ -1,0 +1,105 @@
+Docker CLI & Compose - common commands (short purpose + example)
+
+# Basic info
+docker version  --> show Docker client and server versions
+	example: docker version
+docker info     --> show system-wide Docker info (containers, images, storage)
+	example: docker info
+docker help     --> show help for Docker commands
+
+# Images (build, list, push/pull)
+docker pull IMAGE[:TAG]    --> download an image from a registry
+	example: docker pull nginx:latest
+docker build -t NAME:TAG .  --> build an image from a Dockerfile
+	example: docker build -t myapp:1.0 .
+docker images               --> list local images
+docker tag SOURCE TARGET    --> tag an image (use before push)
+	example: docker tag myapp:1.0 myrepo/myapp:1.0
+docker push REPO:TAG        --> push image to registry
+	example: docker push myrepo/myapp:1.0
+docker rmi IMAGE[:TAG]      --> remove local image
+docker save -o file.tar IMAGE --> save image to tar archive
+docker load -i file.tar     --> load image from tar archive
+
+# Containers (create, run, lifecycle, inspect)
+docker run [OPTIONS] IMAGE [COMMAND] --> create and start container from image
+	example: docker run -d --name web -p 80:80 nginx
+docker ps [-a]               --> list running containers (use -a for all)
+docker start CONTAINER       --> start an existing stopped container
+docker stop CONTAINER        --> stop a running container gracefully
+docker restart CONTAINER     --> restart a container
+docker kill CONTAINER        --> kill a container (SIGKILL)
+docker rm CONTAINER          --> remove container
+docker exec -it CONTAINER CMD--> run a command inside a running container
+	example: docker exec -it mycontainer /bin/sh
+docker logs [-f] CONTAINER   --> view container logs (follow with -f)
+docker inspect OBJECT        --> low-level JSON info for containers/images/networks
+docker cp SRC DEST           --> copy files between host and container
+	example: docker cp mycontainer:/app/log.txt ./log.txt
+docker commit CONTAINER REPO:TAG --> create a new image from a container's changes
+docker stats [CONTAINER...]  --> live resource usage statistics
+docker top CONTAINER         --> show processes running in a container
+
+# Volumes (persistent storage)
+docker volume create NAME    --> create a named volume
+docker volume ls             --> list volumes
+docker volume inspect NAME   --> show volume details
+docker volume rm NAME        --> remove a volume
+docker volume prune          --> remove all unused volumes
+
+# Networks
+docker network create NAME   --> create a custom network
+docker network ls            --> list networks
+docker network inspect NAME  --> inspect network details and attached containers
+docker network connect NET CONTAINER --> connect a container to a network
+docker network disconnect NET CONTAINER --> disconnect a container
+docker network rm NAME       --> remove a network
+
+# System maintenance & cleanup
+docker system df             --> show disk usage by images/containers/volumes
+docker system prune [-a]     --> remove unused data (dangling images, stopped containers); -a removes all unused images
+docker image prune           --> remove unused images
+docker container prune       --> remove stopped containers
+
+# Registry auth
+docker login                 --> authenticate to a registry
+docker logout                --> log out from a registry
+
+# Docker Compose (v2) - multi-container apps
+docker compose up [-d]       --> build (if needed) and start services from compose file
+docker compose down          --> stop and remove compose services, networks
+docker compose build         --> build service images
+docker compose ps            --> list containers in the compose project
+docker compose logs [-f]     --> view logs for services
+docker compose exec SERVICE CMD --> run a command in a service container
+docker compose run SERVICE CMD  --> run a one-off command for a service
+
+# Export / import
+docker save -o image.tar IMAGE  --> save image to tar
+docker load -i image.tar        --> load image from tar
+docker export CONTAINER -o fs.tar --> export container filesystem
+docker import fs.tar REPO:TAG    --> create image from tarball
+
+# Advanced / misc
+docker buildx build ...     --> advanced multi-platform builds (buildx)
+docker scan IMAGE            --> scan image for vulnerabilities
+docker plugin ...            --> manage Docker plugins
+docker checkpoint ...        --> checkpoint/restore containers (experimental)
+
+# Swarm (if using Docker Swarm)
+docker swarm init            --> initialize swarm mode
+docker node ls              --> list swarm nodes
+docker service create ...   --> create a swarm service
+docker stack deploy -c FILE NAME --> deploy a stack from compose file
+
+# Quick examples / patterns
+- Run an interactive shell and remove container after exit:
+	docker run --rm -it ubuntu sh
+- Build, tag and push:
+	docker build -t myrepo/app:1.0 . && docker push myrepo/app:1.0
+- Run detached web server:
+	docker run -d --name web -p 80:80 nginx
+
+Notes:
+- This file contains common, practical Docker commands and short examples. 
+For a full exhaustive reference (every flag and subcommand), see the official Docker docs.
